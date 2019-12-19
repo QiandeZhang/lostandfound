@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    1.加载外部配置文件-->
+    <properties resource="db.properties"/>
+    <!--    2. mybatis 参数配置  -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="defaultFetchSize" value="100"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+    <!--3.别名-->
+    <typeAliases>
+        <package name="com.sakila.entity"/>
+    </typeAliases>
+    <!-- 4.数据库环境 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用JDBC的事务管理 -->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- MySQL数据库驱动 -->
+<!--                <property name="driver" value="${db.driver}"/>-->
+<!--                &lt;!&ndash; 连接数据库的URL &ndash;&gt;-->
+<!--                <property name="url" value="${db.url}"/>-->
+<!--                <property name="username" value="${db.username}"/>-->
+<!--                <property name="password" value="${db.password}"/>-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!-- 连接数据库的URL -->
+                <property name="url" value="jdbc:mysql://localhost:3306/demo?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 5.将mapper文件加入到配置文件中 -->
+    <mappers>
+        <mapper resource="mappers/UserMapper.xml"/>
+    </mappers>
+</configuration>
